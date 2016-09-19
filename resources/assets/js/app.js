@@ -15,6 +15,8 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component('timer', require('./components/Timer.vue'));
+
 const app = new Vue({
     el: 'body'
 });
