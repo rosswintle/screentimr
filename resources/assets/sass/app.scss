@@ -7,3 +7,20 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.timer {
+  text-align: center;
+  font-size: 50vh;
+}
+.timer-controls {
+
+  text-align: center;
+
+  span {
+    display: inline-block;
+    font-size: 18px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+  }
+}
