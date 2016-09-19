@@ -28,6 +28,11 @@ class User extends Authenticatable
     ];
 
     public function timers() {
-        $this->hasOne('App\Timer');
+        return $this->hasOne('App\Timer');
     }
+
+    public function timers() {
+        return $this->hasOne('App\UserSetting');
+    }
+
 }
