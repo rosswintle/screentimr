@@ -27,11 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function timers() {
+    public function timer() {
         return $this->hasOne('App\Timer');
     }
 
-    public function timers() {
+    public function userSetting() {
         return $this->hasOne('App\UserSetting');
     }
 
