@@ -29,20 +29,47 @@ class TimerController extends Controller
             $timer->user_id = $user->id;
             $timer->save();
         }
-        if ($user->userSetting)
+        if ($user->settings)
         {
-            $userSetting = $user->userSetting;
+            $userSettings = $user->settings;
         }
         else
         {
-            $userSetting = new UserSetting;
-            $userSetting->user_id = $user->id;
-            $userSetting->save();
+            $userSettings = new UserSetting;
+            $userSettings->user_id = $user->id;
+            $userSettings->save();
         }
         return view('timer', [
+                'timerId' => $timer->id,
                 'timer' => $timer->time,
-                'decrement' => $userSetting->timer_decrement,
-                'increment' => $userSetting->timer_increment,
+                'decrement' => $userSettings->timer_decrement,
+                'increment' => $userSettings->timer_increment,
             ] );
+    }
+
+    public function decrement( Timer $timer ) {
+        $user = Auth::user();
+
+        if (! $timer->user == $user) {
+            abort(403, 'Not your timer!');
+        }
+
+        $timer->userDecrement($user->settings->timer_decrement);
+
+        return [ 'success' => true ];
+
+    }
+
+    public function increment( Timer $timer ) {
+        $user = Auth::user();
+
+        if (! $timer->user == $user) {
+            abort(403, 'Not your timer!');
+        }
+
+        $timer->userIncrement($user->settings->timer_increment);
+
+        return [ 'success' => true ];
+
     }
 }

@@ -31,7 +31,7 @@ class User extends Authenticatable
         return $this->hasOne('App\Timer');
     }
 
-    public function userSetting() {
+    public function settings() {
         return $this->hasOne('App\UserSetting');
     }
 

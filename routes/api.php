@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+    return Auth::user();
+});
+Route::get('/timer/{timer}/increment', 'TimerController@increment');
+Route::get('/timer/{timer}/decrement', 'TimerController@decrement');
+
+

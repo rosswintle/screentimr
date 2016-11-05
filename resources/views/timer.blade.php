@@ -8,7 +8,8 @@
                     <div class="panel-heading">ScreenTimr</div>
 
                     <div class="panel-body">
-                        <timer :time="{{ $timer }}"
+                        <timer  :timer_id="{{ $timerId }}"
+                                :time="{{ $timer }}"
                                 :increment="{{ $increment }}"
                                 :decrement="{{ $decrement }}">
                         </timer>
