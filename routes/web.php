@@ -16,3 +16,4 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/timer', 'TimerController@index');
+Route::get('/home', 'TimerController@index');
