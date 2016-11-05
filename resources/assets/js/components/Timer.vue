@@ -1,5 +1,5 @@
 <template>
-    <div class="timer">{{ timerMins }}</div>
+    <div class="timer">{{ timerMins }}:{{ timerSecs }}</div>
     <div class="timer-controls">
         <span @click="decrementUser()">Down</span>
         <span @click="incrementUser()">Up</span>
@@ -41,13 +41,16 @@
 
         computed: {
             timerMins: function() {
-                var mins = parseInt(this.time / 60);
-                return this.time == 0 ? 0 : mins + 1;
+                return parseInt(this.time / 60);
+            },
+            timerSecs: function() {
+                var secs = parseInt(this.time % 60);
+                return secs < 10 ? '0' + secs : secs;
             }
         },
 
         ready() {
-            setInterval( this.decrementInterval, 1000 );
+            //setInterval( this.decrementInterval, 1000 );
             console.log('Component ready.')
         }
 
