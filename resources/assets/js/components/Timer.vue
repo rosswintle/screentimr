@@ -1,7 +1,7 @@
 <template>
-    <div class="timer" @click="time -= 1">{{ time }}</div>
+    <div class="timer">{{ timerMins }}</div>
     <div class="timer-controls">
-        <span @click="time -= decrement">Down</span>
+        <span @click="decrementUser()">Down</span>
         <span @click="time += increment">Up</span>
     </div>
 </template>
@@ -13,7 +13,21 @@
 
         methods: {
             decrementInterval: function () {
-                this.time -= 1;
+                if (this.time > 0) {
+                    this.time -= 1;
+                }
+            },
+            decrementUser: function () {
+                this.time = this.time - this.decrement;
+                if (this.time < 0) {
+                    this.time = 0;
+                }
+            }
+        },
+
+        computed: {
+            timerMins: function() {
+                return parseInt(this.time / 60) + 1;
             }
         },
 
