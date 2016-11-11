@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -27,12 +28,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function timer() {
-        return $this->hasOne('App\Timer');
+    public function timers() {
+        return $this->hasMany('App\Timer');
     }
 
     public function settings() {
         return $this->hasOne('App\UserSetting');
+    }
+
+    public function getTodaysTimerAttribute() {
+        $today = new Carbon();
+        $today = $today->startOfDay()->toDateTimeString();
+        return $this->timers()->where('created_at', '>', $today)->first();
     }
 
 }
