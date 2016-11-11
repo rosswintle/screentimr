@@ -8,6 +8,7 @@
                     <div class="panel-heading">ScreenTimr</div>
 
                     <div class="panel-body">
+                        <h3>{{ date('l jS F Y', strtotime($timer_date)) }}</h3>
                         <timer  :timer_id="{{ $timerId }}"
                                 :time="{{ $timer }}"
                                 :increment="{{ $increment }}"

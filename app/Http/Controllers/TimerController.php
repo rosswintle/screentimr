@@ -44,6 +44,7 @@ class TimerController extends Controller
                 'timer' => $timer->time,
                 'decrement' => $userSettings->timer_decrement,
                 'increment' => $userSettings->timer_increment,
+                'timer_date' => $timer->created_at,
             ] );
     }
 
