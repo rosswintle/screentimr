@@ -11,8 +11,10 @@
                         <h3>{{ date('l jS F Y', strtotime($timer_date)) }}</h3>
                         <timer  :timer_id="{{ $timerId }}"
                                 :time="{{ $timer }}"
+                                :limit="{{ $limit }}"
                                 :increment="{{ $increment }}"
-                                :decrement="{{ $decrement }}">
+                                :decrement="{{ $decrement }}"
+                                >
                         </timer>
                     </div>
                 </div>

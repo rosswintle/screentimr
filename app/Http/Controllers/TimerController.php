@@ -37,11 +37,13 @@ class TimerController extends Controller
             $timer = new Timer;
             $timer->user_id = $user->id;
             $timer->time = $userSettings->default_time;
+            $timer->limit = $userSettings->default_limit;
             $timer->save();
         }
         return view('timer', [
                 'timerId' => $timer->id,
                 'timer' => $timer->time,
+                'limit' => $timer->limit,
                 'decrement' => $userSettings->timer_decrement,
                 'increment' => $userSettings->timer_increment,
                 'timer_date' => $timer->created_at,

@@ -4,12 +4,15 @@
         <span @click="decrementUser()">Down</span>
         <span @click="incrementUser()">Up</span>
     </div>
+    <div class="limit">
+        Today's limit: {{ limitMins }}:{{ limitSecs }}
+    </div>
 </template>
 
 <script>
     export default {
 
-        props: ['timer_id', 'time', 'decrement', 'increment'],
+        props: ['timer_id', 'time', 'limit', 'decrement', 'increment'],
 
         methods: {
             decrementInterval: function () {
@@ -45,6 +48,13 @@
             },
             timerSecs: function() {
                 var secs = parseInt(this.time % 60);
+                return secs < 10 ? '0' + secs : secs;
+            },
+            limitMins: function() {
+                return parseInt(this.limit / 60);
+            },
+            limitSecs: function() {
+                var secs = parseInt(this.limit % 60);
                 return secs < 10 ? '0' + secs : secs;
             }
         },

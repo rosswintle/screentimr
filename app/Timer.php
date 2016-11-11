@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timer extends Model
 {
-    protected $fillable = ['time'];
+    protected $fillable = ['time', 'limit'];
 
     protected $attributes = [
         'time' => 0,
+        'limit' => 0,
     ];
 
     public function user()
