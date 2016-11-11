@@ -19,16 +19,7 @@ class TimerController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->timer)
-        {
-            $timer = $user->timer;
-        }
-        else
-        {
-            $timer = new Timer;
-            $timer->user_id = $user->id;
-            $timer->save();
-        }
+
         if ($user->settings)
         {
             $userSettings = $user->settings;
@@ -38,6 +29,15 @@ class TimerController extends Controller
             $userSettings = new UserSetting;
             $userSettings->user_id = $user->id;
             $userSettings->save();
+        }
+
+        $timer = $user->todays_timer;
+        if (!$timer)
+        {
+            $timer = new Timer;
+            $timer->user_id = $user->id;
+            $timer->time = $userSettings->default_time;
+            $timer->save();
         }
         return view('timer', [
                 'timerId' => $timer->id,
