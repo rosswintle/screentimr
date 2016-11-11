@@ -14,8 +14,8 @@ class UserSetting extends Model
     ];
 
     protected $attributes = [
-        'timer_increment' => 5,
-        'timer_decrement' => 5,
+        'timer_increment' => 300,
+        'timer_decrement' => 300,
         'default_time' => 3600,
     ];
 
