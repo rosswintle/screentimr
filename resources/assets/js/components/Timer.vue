@@ -1,9 +1,18 @@
 <template>
-    <div class="timer">{{ timerMins }}:{{ timerSecs }}</div>
+
+    <div class="piechart">
+        <div class="first-half"></div>
+        <div class="first-half-mask" v-show="timerPercent < 50" v-bind:style="{ transform: firstHalfMaskRotate }"></div>
+        <div class="second-half" v-show="timerPercent > 50" v-bind:style="{ transform: secondHalfMaskRotate }"></div>
+        <div class="middle"></div>
+        <div class="timer">{{ timerMins }}:{{ timerSecs }}</div>
+    </div>
+
     <div class="timer-controls">
         <span @click="decrementUser()">Down</span>
         <span @click="incrementUser()">Up</span>
     </div>
+
     <div class="limit">
         Today's limit: {{ limitMins }}:{{ limitSecs }}
     </div>
@@ -38,8 +47,17 @@
                 }, (response) => {
                     // error callback
                 });
-
             }
+        },
+        watch: {
+            timerPercent: function(newTimerPercent) {
+                console.log(newTimerPercent);
+                //piechart.update(newTimerPercent);
+            }
+        },
+        ready: function() {
+            console.log(this.timerPercent);
+            //piechart.update( this.timerPercent );
         },
 
         computed: {
@@ -56,6 +74,18 @@
             limitSecs: function() {
                 var secs = parseInt(this.limit % 60);
                 return secs < 10 ? '0' + secs : secs;
+            },
+            timerPercent: function() {
+                return (this.time / this.limit) * 100;
+            },
+            timerDegrees: function() {
+                return 360 * (this.timerPercent / 100);
+            },
+            firstHalfMaskRotate: function() {
+                return 'rotate(' + this.timerDegrees + 'deg)';
+            },
+            secondHalfMaskRotate: function() {
+                return 'rotate(' + (this.timerDegrees - 180) + 'deg)';
             }
         },
 
@@ -65,4 +95,43 @@
         }
 
     }
+
+
+/* var piechart = (function () {
+
+  var update = function (percent) {
+    if (percent > 50) {
+      showSecondHalf();
+      setSecondHalf(percent);
+    } else {
+      hideSecondHalf();
+      setFirstHalfMask(percent);
+    }
+  };
+
+  var setFirstHalfMask = function (percent) {
+    var degreesToShow = percentToDegrees(percent);
+    $('.piechart .first-half-mask').css({
+      'transform': 'rotate(' + degreesToShow + 'deg)'
+    });
+  };
+
+  var setSecondHalf = function (percent) {
+    var degreesToShow = percentToDegrees(percent - 50);
+    $('.piechart .second-half').css({
+      'transform': 'rotate(' + degreesToShow + 'deg)'
+    });
+  };
+
+  return {
+    percentToDegrees: percentToDegrees,
+    update: update
+  };
+})();
+*/
+//piechart.update($('input[type="number"]').val());
+//$('input[type="number"]').change(function () {
+//    piechart.update($(this).val());
+//});
+
 </script>

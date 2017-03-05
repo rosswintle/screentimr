@@ -10,7 +10,11 @@
 
 .timer {
   text-align: center;
-  font-size: 30vh;
+  font-size: 10vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
 }
 .timer-controls {
 
@@ -23,4 +27,60 @@
     border-radius: 4px;
     padding: 8px 12px;
   }
+}
+
+.limit {
+  text-align: center;
+}
+
+.piechart {
+  width: 70vw;
+  height: 70vw;
+  max-width: 70vh;
+  max-height: 70vh;
+  margin: 10vh auto;
+  position: relative;
+}
+.piechart .first-half {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-top-right-radius: 200% 100%;
+  border-bottom-right-radius: 200% 100%;
+  background-color: red;
+}
+.piechart .first-half-mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-top-right-radius: 200% 100%;
+  border-bottom-right-radius: 200% 100%;
+  background-color: white;
+  transform: rotate(0deg);
+  transform-origin: 0 50%
+}
+.piechart .second-half {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-top-right-radius: 200% 100%;
+  border-bottom-right-radius: 200% 100%;
+  background-color: red;
+  transform: rotate(0deg);
+  transform-origin: 0 50%;
+}
+.middle {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  background-color: white;
+  border-radius: 100%;
 }
