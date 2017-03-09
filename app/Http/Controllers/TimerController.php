@@ -57,7 +57,8 @@ class TimerController extends Controller
             abort(403, 'Not your timer!');
         }
 
-        $timer->userDecrement($user->settings->timer_decrement);
+//        $timer->userDecrement($user->settings->timer_decrement);
+        $timer->userDecrement($user);
 
         return [ 'success' => true ];
 
@@ -70,7 +71,7 @@ class TimerController extends Controller
             abort(403, 'Not your timer!');
         }
 
-        $timer->userIncrement($user->settings->timer_increment);
+        $timer->userIncrement($user);
 
         return [ 'success' => true ];
 

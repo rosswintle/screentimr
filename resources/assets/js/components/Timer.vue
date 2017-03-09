@@ -9,8 +9,8 @@
     </div>
 
     <div class="timer-controls">
-        <span @click="decrementUser()">Down</span>
-        <span @click="incrementUser()">Up</span>
+        <span @click="decrementUser()">Down (-{{ decrement / 60 }})</span>
+        <span @click="incrementUser()">Up (+{{ increment / 60 }})</span>
     </div>
 
     <div class="limit">
@@ -30,20 +30,25 @@
                 }
             },
             decrementUser: function () {
-                this.time = this.time - this.decrement;
-                if (this.time < 0) {
-                    this.time = 0;
+                let newTime = this.time - this.decrement;
+                if (newTime < 0) {
+                    newTime = 0;
                 }
                 this.$http.get('/api/timer/' + this.timer_id + '/decrement').then((response) => {
                     // success callback
+                    this.time = newTime;
                 }, (response) => {
                     // error callback
                 });
             },
             incrementUser: function () {
-                this.time += this.increment;
+                let newTime = this.time + this.increment;
+                if (newTime > this.limit) {
+                    newTime = this.limit;
+                }
                 this.$http.get('/api/timer/' + this.timer_id + '/increment').then((response) => {
                     // success callback
+                    this.time = newTime;
                 }, (response) => {
                     // error callback
                 });

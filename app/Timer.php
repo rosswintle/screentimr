@@ -18,19 +18,22 @@ class Timer extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function userDecrement( $seconds ) {
-        if ($this->time > $seconds) {
-            $this->time -= $seconds;
+    public function userDecrement( User $user ) {
+        if ($this->time > $user->settings->timer_decrement) {
+            $this->time -= $user->settings->timer_decrement;
         } else {
             $this->time = 0;
-
         }
         $this->save();
         return $this;
     }
 
-    public function userIncrement( $seconds ) {
-        $this->time += $seconds;
+    public function userIncrement( User $user ) {
+        if ($this->time + $user->settings->timer_increment > $user->settings->default_limit) {
+            $this->time = $user->settings->default_limit;
+        } else {
+            $this->time += $user->settings->timer_increment;
+        }
         $this->save();
         return $this;
     }

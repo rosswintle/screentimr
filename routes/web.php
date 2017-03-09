@@ -16,3 +16,10 @@ Route::get('/', 'TimerController@index');
 Auth::routes();
 
 Route::get('/home', 'TimerController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('settings', 'UserSettingController@edit');
+    Route::post('settings', 'UserSettingController@update');
+
+});
