@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'TimerController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'TimerController@index');
+Route::get('/timer', 'TimerController@index')->name('timer');
 
 Route::group(['middleware' => 'auth'], function () {
 
