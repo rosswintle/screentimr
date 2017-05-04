@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>Screen Timer</h1>
+            <h1>ScreenTimer</h1>
             <p>Yes, I do appreciate the irony of a screen-timer that lives on a screen.</p>
             <p>But that is what I have made.</p>
             <h2>What does it do?</h2>
