@@ -1,20 +1,21 @@
 <template>
+    <div class="timer-container">
+        <div class="piechart">
+            <div class="first-half"></div>
+            <div class="first-half-mask" v-show="timerPercent < 50" v-bind:style="{ transform: firstHalfMaskRotate }"></div>
+            <div class="second-half" v-show="timerPercent > 50" v-bind:style="{ transform: secondHalfMaskRotate }"></div>
+            <div class="middle"></div>
+            <div class="timer">{{ timerMins }}:{{ timerSecs }}</div>
+        </div>
 
-    <div class="piechart">
-        <div class="first-half"></div>
-        <div class="first-half-mask" v-show="timerPercent < 50" v-bind:style="{ transform: firstHalfMaskRotate }"></div>
-        <div class="second-half" v-show="timerPercent > 50" v-bind:style="{ transform: secondHalfMaskRotate }"></div>
-        <div class="middle"></div>
-        <div class="timer">{{ timerMins }}:{{ timerSecs }}</div>
-    </div>
+        <div class="timer-controls">
+            <span @click="decrementUser()">Down (-{{ decrement / 60 }})</span>
+            <span @click="incrementUser()">Up (+{{ increment / 60 }})</span>
+        </div>
 
-    <div class="timer-controls">
-        <span @click="decrementUser()">Down (-{{ decrement / 60 }})</span>
-        <span @click="incrementUser()">Up (+{{ increment / 60 }})</span>
-    </div>
-
-    <div class="limit">
-        Today's limit: {{ limitMins }}:{{ limitSecs }}
+        <div class="limit">
+            Today's limit: {{ limitMins }}:{{ limitSecs }}
+        </div>
     </div>
 </template>
 
@@ -34,7 +35,7 @@
                 if (newTime < 0) {
                     newTime = 0;
                 }
-                this.$http.get('/api/timer/' + this.timer_id + '/decrement').then((response) => {
+                axios.get('/api/timer/' + this.timer_id + '/decrement').then((response) => {
                     // success callback
                     this.time = newTime;
                 }, (response) => {
@@ -46,7 +47,7 @@
                 if (newTime > this.limit) {
                     newTime = this.limit;
                 }
-                this.$http.get('/api/timer/' + this.timer_id + '/increment').then((response) => {
+                axios.get('/api/timer/' + this.timer_id + '/increment').then((response) => {
                     // success callback
                     this.time = newTime;
                 }, (response) => {
