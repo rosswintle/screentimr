@@ -13,7 +13,7 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('timer', require('./components/Timer.vue'));
+Vue.component('timer', require('./components/Timer.vue').default);
 
 const app = new Vue({
     el: '#app'
